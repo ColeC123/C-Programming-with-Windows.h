@@ -3,19 +3,23 @@
 #include "stdlib.h"
 #include "windows.h"
 
-static int height = 12;
-static int width = 30;
-
 void gotoXY(int column, int row);
 
-void init_buffer(char buffer[height][width + 2], int height, int width);
+void reset_buffer(char** buffer, int height, int width);
 
 void hide_cursor(void);
 
 bool GetKey(char input);
 
+char** init_buffer(int height, int width);
+
+void free_buffer(char** buffer, int height);
+
 int main(void) {
-    char buffer[height][width + 2];
+    int height = 12;
+    int width = 30;
+
+    char** buffer = init_buffer(height, width);
 
     hide_cursor();
     system("cls");
@@ -27,10 +31,11 @@ int main(void) {
         gotoXY(0, 0);
 
         if (GetKey('q')) {
+            free_buffer(buffer, height);
             return 0;
         }
 
-        init_buffer(buffer, height, width);
+        reset_buffer(buffer, height, width);
 
         if (GetKey('w')) {
             y_pos--;
@@ -66,6 +71,7 @@ int main(void) {
         }
     }
 
+    free_buffer(buffer, height);
     return 0;
 }
 
@@ -82,7 +88,7 @@ void gotoXY(int column, int row) {
     }
 }
 
-void init_buffer(char buffer[height][width + 2], int height, int width) {
+void reset_buffer(char** buffer, int height, int width) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             buffer[i][j] = ' ';
@@ -121,4 +127,21 @@ bool GetKey(char input) {
         default:
             return false;
     }
+}
+
+char** init_buffer(int height, int width) {
+    char** buffer = (char**)malloc(height * sizeof(char*));
+
+    for (int i = 0; i < height; i++) {
+        buffer[i] = (char*)malloc((width + 2) * sizeof(char));
+    }
+
+    return buffer;
+}
+
+void free_buffer(char** buffer, int height) {
+    for (int i = 0; i < height; i++) {
+        free(buffer[i]);
+    }
+    free(buffer);
 }
