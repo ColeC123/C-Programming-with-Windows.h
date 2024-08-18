@@ -1,7 +1,7 @@
-#Snake Game in C
+# Snake Game in C
 Snake Game Project using C and windows library functions. This unfortunately means this program will only run on windows machines, and I have included the exe file for easy downloading.
 
-##Download instructs for MinGW-w64 GCC
+## Download instructs for MinGW-w64 GCC
 If that fails you can compile the program yourself using GCC. [MinGW-w64 includes GCC and other langauge compilers](https://github.com/niXman/mingw-builds-binaries/releases/tag/13.2.0-rt_v11-rev1).
 Specifically, I recommend downloding the "x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1.7z", which is the version of MinGW-w64 that I use on my machine.
 
@@ -19,7 +19,7 @@ Specifically, I recommend downloding the "x86_64-13.2.0-release-posix-seh-ucrt-r
 
   6. If the command doesn't throw an error and returns the version of gcc installed, then everything has been installed correctly.
 
-##Compilation Instructions For Program Files Using GCC
+## Compilation Instructions For Program Files Using GCC
 To compile the project using gcc, first download all of the ".c" and ".h" files, and move them into a folder of your choice.
 
   1. Once you have all of the downloaded files in one folder, open command prompt or windows power shell and type in cd + "path to folder containing files". Example: cd "C:\Users\Bob\Program Files"
