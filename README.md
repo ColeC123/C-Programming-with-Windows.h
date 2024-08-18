@@ -1,7 +1,7 @@
 # Snake Game in C
 Snake Game Project using C and windows library functions. This unfortunately means this program will only run on windows machines, and I have included the exe file for easy downloading.
 
-## Download instructs for MinGW-w64 GCC
+## Download instructions for MinGW-w64 GCC
 If exe fails to run you can compile the program yourself using GCC. [MinGW-w64 includes GCC and other langauge compilers](https://github.com/niXman/mingw-builds-binaries/releases/tag/13.2.0-rt_v11-rev1).
 Specifically, I recommend downloding the "x86_64-13.2.0-release-posix-seh-ucrt-rt_v11-rev1.7z", which is the version of MinGW-w64 that I use on my machine.
 
