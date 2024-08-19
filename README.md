@@ -25,9 +25,9 @@ To compile the project using gcc, first download all of the ".c" and ".h" files,
   1. Once you have all of the downloaded files in one folder, open command prompt or windows power shell and type in cd + "path to folder containing files". Example: cd "C:\Users\Bob\Program Files"
      This command allows you to access the files contained in the folder you cd (change directory) into.
 
-  2. Now that you have access to the program files, type in the command "gcc test.c -L C:\Windows\System32 -l winmm -o test". This will output an executable file that can be run. Enjoy the program!
+  2. Now that you have access to the program files, type in the command "gcc test.c -I C:\Windows\System32 -l winmm -o test". This will output an executable file that can be run. Enjoy the program!
      
-     The above commands tells gcc to compile the test.c program "gcc test.c", include the path to System32 for library linking purposes "-L C:\Windows\System32", link the DLL (Dynamic Link Library)
+     The above commands tells gcc to compile the test.c program "gcc test.c", include the path to System32 for library linking purposes "-I C:\Windows\System32", link the DLL (Dynamic Link Library)
      named winmm from inside C:\Windows\System32 to the code written in test.c "-l winmm", and output an executable file named test "-o test".
 
      The reason I need to link to winmm.dll is because it contains the definitions for the functions declared in "timeapi.h", which means that without winmm.dll my program doesn't know what the
