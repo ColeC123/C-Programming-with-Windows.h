@@ -27,6 +27,16 @@ void hide_cursor(void) {
     SetConsoleCursorInfo(hConsole, &info);
 }
 
+void show_cursor(void) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+
+    info.dwSize = 100;
+    info.bVisible = TRUE;
+
+    SetConsoleCursorInfo(hConsole, &info);
+}
+
 bool GetKey(char input) {
     switch (input) {
         case 'w':

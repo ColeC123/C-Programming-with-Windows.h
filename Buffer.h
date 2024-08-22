@@ -13,7 +13,7 @@ typedef struct Buffer {
 } Buffer;
 
 static const Buffer default_buffer = {
-    .string = {.contents = NULL, .memsize = 0, .datasize = 0}, 
+    .string = {.contents = NULL, .memsize = 0, .datasize = 0},
     .dimensions = {.X = 30, .Y = 12},
 };
 
@@ -35,18 +35,18 @@ void set_buffer_value(Buffer* buffer, Vector2 position, char input) {
     }
 }
 
- char get_buffer_value(Buffer* buffer, Vector2 position) {
+char get_buffer_value(Buffer* buffer, Vector2 position) {
     if (position.X < buffer->dimensions.X && position.Y < buffer->dimensions.Y) {
         return buffer->string.contents[(position.X % buffer->dimensions.X) + ((buffer->dimensions.X + 1) * position.Y)];
     }
- }
+}
 
- void clear_buffer(Buffer* buffer) {
+void clear_buffer(Buffer* buffer) {
     for (int i = 0; i < buffer->dimensions.Y; i++) {
         for (int j = 0; j < buffer->dimensions.X; j++) {
             set_buffer_value(buffer, (Vector2){.X = j, .Y = i}, ' ');
         }
     }
- }
+}
 
 #endif

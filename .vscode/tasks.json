@@ -8,8 +8,12 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "-I",
+                "C:\\Windows\\System32",
+                "-l",
+                "winmm",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
             ],
             "options": {
                 "cwd": "${fileDirname}"
