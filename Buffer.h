@@ -49,4 +49,14 @@ void clear_buffer(Buffer* buffer) {
     }
 }
 
+void shift_right(Vector2* vec, int size) {
+    Vector2 temp_one = (Vector2){.X = vec[0].X, .Y = vec[0].Y};
+    for (int i = 1; i < size; i++) {
+        Vector2 temp_two = (Vector2){.X = vec[i].X, .Y = vec[i].Y};
+        vec[i] = (Vector2){.X = temp_one.X, .Y = temp_one.Y};
+        temp_one = (Vector2){.X = temp_two.X, .Y = temp_two.Y};
+    }
+    vec[0] = (Vector2){.X = 0, .Y = 0};
+}
+
 #endif

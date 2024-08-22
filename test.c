@@ -31,12 +31,6 @@ static const Snake default_snake = {
     // body_size refers to the amount of trailing sections on the snake, the head is treated seperately
 };
 
-void shift_right(Vector2* vec, int size);
-
-void print_vec_list(Vector2* vec, int size);
-
-void print_vec_list(Vector2* vec, int size);
-
 int main(void) {
     Buffer buffer = default_buffer;
     define_buffer(&buffer);
@@ -59,6 +53,8 @@ int main(void) {
         .X = (timeGetTime() % (buffer.dimensions.X - 2)) + 1,
         .Y = (timeGetTime() % (buffer.dimensions.Y - 2)) + 1,
     };
+
+    enum directions past_direction = left;
 
     while (1) {
         if (GetKey('q')) {
@@ -88,7 +84,10 @@ int main(void) {
             movement_speed = horizontal_speed;
         }
 
+        past_direction = snake.direction;
+
         curr_time = timeGetTime();
+        //This if statement contains almost all of the game logic
         if (curr_time - past_time > movement_speed) {
             past_time = curr_time;
 
@@ -142,6 +141,18 @@ int main(void) {
                 }
             }
 
+            for (int i = 0; i < snake.body_size; i++) {
+                if (snake.head.X == snake.position[i].X && snake.head.Y == snake.position[i].Y) {
+                    system("cls");
+                    show_cursor();
+                    free(snake.position);
+                    free(buffer.string.contents);
+                    gotoXY(10, 6);
+                    printf("GameOver");
+                    return 0;
+                }
+            }
+
             clear_buffer(&buffer);
 
             for (int i = 0; i < buffer.dimensions.X; i++) {
@@ -165,12 +176,6 @@ int main(void) {
             gotoXY(0, 0);
 
             printf("%s", buffer.string.contents);
-
-            printf("\n\n");
-            printf("Head Position: {%d, %d}\n\n", snake.head.X, snake.head.Y);
-            for (int i = 0; i < snake.body_size; i++) {
-                printf("{%d, %d} ", snake.position[i].X, snake.position[i].Y);
-            }
         }
     }
 
@@ -178,21 +183,4 @@ int main(void) {
     free(snake.position);
     show_cursor();
     return 0;
-}
-
-void shift_right(Vector2* vec, int size) {
-    Vector2 temp_one = (Vector2){.X = vec[0].X, .Y = vec[0].Y};
-    for (int i = 1; i < size; i++) {
-        Vector2 temp_two = (Vector2){.X = vec[i].X, .Y = vec[i].Y};
-        vec[i] = (Vector2){.X = temp_one.X, .Y = temp_one.Y};
-        temp_one = (Vector2){.X = temp_two.X, .Y = temp_two.Y};
-    }
-    vec[0] = (Vector2){.X = 0, .Y = 0};
-}
-
-void print_vec_list(Vector2* vec, int size) {
-    for (int i = 0; i < size; i++) {
-        printf("{%d, %d} ", vec[i].X, vec[i].Y);
-    }
-    printf("\n");
 }
