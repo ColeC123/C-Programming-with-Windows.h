@@ -9,19 +9,29 @@ typedef struct string {
     int datasize;
 } string;
 
+//The default string state. Functions defined below rely on these default values for initialization.
+//When using realloc with a NULL pointer, it will act like malloc. This simplifies the code a bit.
 static const string default_string = {.contents = NULL, .memsize = 0, .datasize = 0};
 
+//Adds a character to the end of the char* part of the string struct
 void append_char(string* string, char input) {
+    //If the current position in the character array is less then the memory stored, simply increment the position in the character array
+    //The position in the character array is stored in string->datasize
     if (string->datasize < string->memsize) {
         string->contents[string->datasize] = input;
         string->datasize++;
 
     } else {
+        //memsize is incremented since the default memsize value for a string is 0
+        //Using realloc with a size of 0 acts like free, so memsize is incremented to prevent a possible double freeing
         string->memsize++;
+
+        //Double memroy size of array since copying values is expensive
         char* test = (char*)realloc(string->contents, 2 * string->memsize * sizeof(char));
 
+        //Make Sure realoc didn't fail
         if (test == NULL) {
-            printf("\nRealloc Failed for char append. memsize is: %d\n", string->memsize);
+           exit(1);
         } else {
             string->contents = test;
             string->memsize *= 2;
