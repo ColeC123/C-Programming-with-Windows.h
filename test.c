@@ -80,7 +80,7 @@ int PlayGame(void) {
 
     while (1) {
         // Quits when q is pressed
-        if (GetKey('q')) {
+        if (GetKey(qKey)) {
             free(available_berry_positions);
             free(buffer.string.contents);
             free(snake.positions);
@@ -259,6 +259,8 @@ int PlayGame(void) {
 
             // Reset the size of the available_berry_positions to match the size of the grid
             available_berry_positions_size = (buffer.dimensions.Y - 2) * (buffer.dimensions.X - 2);
+
+            ClearInputBuffer();
         }
     }
 
@@ -290,15 +292,17 @@ int EndGame(void) {
     printf("%s", buffer.string.contents);
 
     gotoXY(buffer.dimensions.X / 2 - 5, buffer.dimensions.Y / 2);
-
     printf("Game Over");
+
+    gotoXY(buffer.dimensions.X / 2 - 7, buffer.dimensions.Y / 2 + 1);
+    printf("Press q to quit");
 
     gotoXY(0, buffer.dimensions.Y + 2);
 
     while (1) {
         if (GetKey(qKey)) {
             free(buffer.string.contents);
-            ShowCursor(true);
+            show_cursor();
             return 0;
         }
     }

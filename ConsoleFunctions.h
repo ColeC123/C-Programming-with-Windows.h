@@ -63,4 +63,10 @@ bool GetKey(enum keys input) {
     return GetAsyncKeyState(input) & 0x0001;
 }
 
+//Clears the input buffer, which will continue to read and store keyboard input even as the program is running
+void ClearInputBuffer(void) {
+    HANDLE hConsole = GetStdHandle(STD_INPUT_HANDLE);
+    FlushConsoleInputBuffer(hConsole);
+}
+
 #endif
