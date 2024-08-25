@@ -37,6 +37,7 @@ int EndGame(void);
 
 int main(void) {
     PlayGame();
+    return 0;
 }
 
 int PlayGame(void) {
